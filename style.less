@@ -1,0 +1,238 @@
+@sticky-yellow: #ffc;
+@sticky-orange: #f8bd49;
+@sticky-green: #cee2d7;
+@sticky-blue: #b3cce2;
+@sticky-red: #ee5f35;
+@sticky-purple: #a2509a;
+
+@border-radius: 3px;
+
+body {
+  font: normal x-small verdana,arial,helvetica,sans-serif;
+  margin: 0;
+  font-size: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+video,
+img {
+  max-width: 100%;
+}
+
+main {
+
+}
+
+input,
+textarea {
+  border: 0;
+  padding: 5px;
+  width: 100%;
+  margin: 5px 0;
+  background: white;
+  border-radius: @border-radius;
+}
+
+button {
+  margin: 0;
+  padding: 5px;
+  margin: 5px;
+  border: 0;
+  font-family: inherit;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#pencil-toggle,
+#new-sticky-form button[type="submit"] {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  z-index: 100;
+  background-color: white;
+  color: black;
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  box-shadow: 5px 5px 7px rgba(50,50,50,.6);
+
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+}
+
+#pencil-toggle {
+  background-image: url(assets/pencil.svg);
+  background-size: 40px 40px;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  &:hover {
+    background-image: url(assets/pencil-white.svg);
+  }
+}
+
+#wall {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  min-height: 100vh;
+  overflow-y: scroll; 
+  padding: 20px 10px;
+  background: url(assets/rice-paper-2.png) 200px 200px repeat #8d7767;
+}
+
+#new-sticky-form {
+  position: fixed;
+  right: 0px;
+  bottom: 10px;
+  width: calc(100vw - 110px);
+  padding: 5px 10px;
+  overflow: hidden;
+  margin-right: 100px;
+  background: fade(black, 70%);
+  border-radius: @border-radius;
+  box-shadow: 5px 5px 7px rgba(50,50,50,.6);
+
+  @media (min-width: 768px) {
+    width: 400px;
+  }
+
+  input[type="radio"] {
+    width: auto;
+
+  }
+
+  .color-block {
+    display: inline-block;
+
+    label {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      margin: 0 5px;
+      vertical-align: middle;
+    }
+  }
+}
+
+.color-block label[for="bg-color-yellow"] {
+  background: @sticky-yellow;
+}
+
+.sticky-note.orange,
+.color-block label[for="bg-color-orange"] {
+  background: @sticky-orange;
+}
+
+.sticky-note.green,
+.color-block label[for="bg-color-green"] {
+  background: @sticky-green;
+}
+
+.sticky-note.blue,
+.color-block label[for="bg-color-blue"] {
+  background: @sticky-blue;
+}
+
+.sticky-note.red,
+.color-block label[for="bg-color-red"] {
+  background: @sticky-red;
+}
+
+.sticky-note.purple,
+.color-block label[for="bg-color-purple"] {
+  background: @sticky-purple;
+}
+
+#bottom-area {
+  // width: 100%;
+  // height: 180px;
+  // padding: 20px 10px 10px 10px;
+  // overflow-y: scroll;
+  // background: url(assets/rice-paper-2.png) 200px 200px repeat #8d7767;
+}
+
+.sticky-note {
+  @side-padding: 20px;
+  @side-margin: 10px;
+  @base-width: 300px;
+  @max-height: 270px;
+
+  flex: auto;
+  max-width: 100%;
+  min-height: 150px;
+  max-height: 100%;
+  margin: @side-margin;
+  font-family: 'Shadows Into Light', cursive;
+  background: @sticky-yellow;
+  display: inline-block;
+  padding: @side-padding;
+  box-shadow: 5px 5px 7px rgba(50,50,50,.6);
+  font-size: 16px;
+
+  @media (min-width: 768px) {
+    max-width: 300px;
+    max-height: 270px;
+  }
+
+  &.has-media {
+    .content {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    @media (min-width: 768px) {
+      max-width: @base-width * 2 - 200px;
+
+      .content {
+        flex-wrap: nowrap;
+      }
+
+      img {
+        margin-right: 10px;
+        max-width: 200px;
+        max-height: calc(@max-height - @side-padding*2);
+      }
+    }
+  }
+
+  .submitter {
+    float: right;
+  }
+}
+
+.sticky-note:nth-child(even) {
+  transform: rotate(-2deg);
+  position: relative;
+  top: -2px;
+}
+
+.sticky-note:nth-child(3n) {
+  transform: rotate(1deg);
+  position: relative;
+  top: 0;
+}
+
+.sticky-note:nth-child(5n) {
+  transform: rotate(2deg);
+  position: relative;
+  top: -1px;
+}
+
+.sticky-note:nth-child(7n) {
+  transform: rotate(-1deg);
+  position: relative;
+  top: -2px;
+}
+
+.sticky-note:nth-child(10n) {
+  transform: rotate(0deg);
+  position: relative;
+  top: 0px;
+}

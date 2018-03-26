@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+  <head>
+    <title>stickie wall</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:title" content="">
+    <meta property="og:image" content="https://mmmavis.github.io/stickies/assets/og-logo.png">
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
+    <link rel="apple-touch-icon" type="image/png" sizes="90x90" href="favicon-mobile-home.png">
+    <link rel="icon" type="image/png" sizes="90x90" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet"> 
+    <link rel="stylesheet/less" type="text/css" href="style.less" />
+    <script type="text/javascript" src="lib/less.min.js" ></script>
+    <script type="text/javascript" src="lib/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="lib/handlebars-v4.0.11.js"></script>
+    <script type="text/javascript" src="lib/moment.js"></script>
+
+    <script id="sticky-template" type="text/x-handlebars-template">
+      <div class="sticky-note {{bgColor}}{{#if imgSrc}} has-media{{/if}}" data-id="{{id}}" id="{{id}}">
+        <div class="content">
+            <div>
+            {{#if imgSrcIsVideo}}
+              <video src="{{imgSrc}}"controls preload="metadata">
+                Sorry, your browser doesn't support embedded videos.
+              </video>
+            {{else if imgSrc}}
+              <img src="{{imgSrc}}">
+            {{/if}}
+          </div>
+          <div>
+            <div>{{{message}}}</div>
+            <div class="submitter">
+              <div>— {{submitter}}</div>
+              <div>({{localTime timestamp}})</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </script>
+  </head>
+  <body>
+    <div id="container">
+      <main>
+        <button id="pencil-toggle">
+        </button>
+        <div id="wall">
+        </div>
+      </main>
+      <form id="new-sticky-form">
+        <div>
+          <textarea name="message" type="text" maxlength=140 placeholder="message (max. 140 characters)" required></textarea>
+        </div>
+        <div>
+          <input name="imgSrc" type="text" placeholder="link to image (optional)" />
+        </div>
+        <div>
+          <input name="submitter" type="text" placeholder="your name" required />
+        </div>
+        <div>
+          <div class="color-block">
+            <input type="radio" id="bg-color-yellow" name="bgColor" value="yellow" checked="checked"><label for="bg-color-yellow"></label>
+          </div>
+          <div class="color-block">
+            <input type="radio" id="bg-color-orange" name="bgColor" value="orange"><label for="bg-color-orange"></label>
+          </div>
+          <div class="color-block">
+            <input type="radio" id="bg-color-green" name="bgColor" value="green"><label for="bg-color-green"></label>
+          </div>
+          <div class="color-block">
+            <input type="radio" id="bg-color-blue" name="bgColor" value="blue"><label for="bg-color-blue"></label>
+          </div>
+          <div class="color-block">
+            <input type="radio" id="bg-color-red" name="bgColor" value="red"><label for="bg-color-red"></label>
+          </div>
+          <div class="color-block">
+            <input type="radio" id="bg-color-purple" name="bgColor" value="purple"><label for="bg-color-purple"></label>
+          </div>
+        </div>
+        <div>
+          <button type="submit">SEND</button>
+        </div>
+      </form>
+      <div id="bottom-area">
+      </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
