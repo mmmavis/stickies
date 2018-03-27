@@ -160,7 +160,7 @@ button {
 }
 
 .sticky-note {
-  @side-padding: 20px;
+  @side-padding: 15px;
   @side-margin: 10px;
   @base-width: 300px;
   @max-height: 270px;
@@ -170,35 +170,38 @@ button {
   min-height: 150px;
   max-height: 100%;
   margin: @side-margin;
-  font-family: 'Shadows Into Light', cursive;
+  font-family: 'Caveat', cursive;
   background: @sticky-yellow;
   display: inline-block;
   padding: @side-padding;
   box-shadow: 5px 5px 7px rgba(50,50,50,.6);
-  font-size: 16px;
+  font-size: 20px;
+  animation: stickon 150ms cubic-bezier(.6,.04,.98,.34);
+
+  @keyframes stickon {
+    from {
+      transform: scale(3);
+    }
+
+    to {
+      transform: scale(1);
+    }
+  }
 
   @media (min-width: 768px) {
     max-width: 300px;
-    max-height: 270px;
+    max-height: @max-height;
   }
 
   &.has-media {
-    .content {
-      display: flex;
-      flex-wrap: wrap;
-    }
-
     @media (min-width: 768px) {
       max-width: @base-width * 2 - 200px;
-
-      .content {
-        flex-wrap: nowrap;
-      }
 
       img {
         margin-right: 10px;
         max-width: 200px;
         max-height: calc(@max-height - @side-padding*2);
+        float: left;
       }
     }
   }

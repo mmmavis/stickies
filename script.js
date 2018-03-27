@@ -38,15 +38,25 @@ Handlebars.registerHelper("localTime", function(timestamp) {
 function renderAllStickies(done) {
   firebase.database().ref('/stickies').once('value').then(function(snapshot) {
     var stickies = snapshot.val();
+    var numStickies = Object.keys(stickies).length;
+    var currIndex = 0;
 
-    Object.keys(stickies).forEach(function(key) {
-      var sticky = stickies[key];
-      sticky.id = key;
-      console.log("sticky", sticky);
-      renderSticky(sticky);
-    })
+    function renderStickiesWithDelay() {
+      var key = Object.keys(stickies)[currIndex];
+      var currentSticky = stickies[key];
 
-    done();
+      currentSticky.id = key;
+      renderSticky(currentSticky);
+
+      currIndex += 1;
+      if (currIndex <= numStickies-1) {
+        setTimeout(renderStickiesWithDelay, 400);
+      } else {
+        done();
+      }
+    }
+
+    renderStickiesWithDelay();
   });
 }
 

@@ -15,7 +15,7 @@
     <meta property="og:image:type" content="image/png" />
     <link rel="apple-touch-icon" type="image/png" sizes="90x90" href="favicon-mobile-home.png">
     <link rel="icon" type="image/png" sizes="90x90" href="favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet">
     <link rel="stylesheet/less" type="text/css" href="style.less" />
     <script type="text/javascript" src="lib/less.min.js" ></script>
     <script type="text/javascript" src="lib/jquery-3.2.1.min.js"></script>
@@ -25,20 +25,18 @@
     <script id="sticky-template" type="text/x-handlebars-template">
       <div class="sticky-note {{bgColor}}{{#if imgSrc}} has-media{{/if}}" data-id="{{id}}" id="{{id}}">
         <div class="content">
-            <div>
-            {{#if imgSrcIsVideo}}
-              <video src="{{imgSrc}}"controls preload="metadata">
-                Sorry, your browser doesn't support embedded videos.
-              </video>
-            {{else if imgSrc}}
-              <img src="{{imgSrc}}">
-            {{/if}}
-          </div>
+          {{#if imgSrcIsVideo}}
+            <video src="{{imgSrc}}"controls preload="metadata">
+              Sorry, your browser doesn't support embedded videos.
+            </video>
+          {{else if imgSrc}}
+            <img src="{{imgSrc}}">
+          {{/if}}
           <div>
             <div>{{{message}}}</div>
             <div class="submitter">
               <div>— {{submitter}}</div>
-              <div>({{localTime timestamp}})</div>
+              <div><small>({{localTime timestamp}})</small></div>
             </div>
           </div>
         </div>
