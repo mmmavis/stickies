@@ -1,3 +1,5 @@
+const ANIMATION_DELAY = 400; // in ms
+
 // Initialize Firebase
 var config = {
   apiKey: "AIzaSyDwy5Kbmd7GHTdXbRewd8OZaArBWPKDurs",
@@ -22,7 +24,9 @@ firebase.auth().onAuthStateChanged(function(user) {
     // console.log("user");
 
     renderAllStickies(function() {
-      
+      setTimeout(function() {
+        $("#wall").append(createHTML({},"new-sticky-template"));
+      }, ANIMATION_DELAY);
     });
   } else {
     // User is signed out.
@@ -50,7 +54,7 @@ function renderAllStickies(done) {
 
       currIndex += 1;
       if (currIndex <= numStickies-1) {
-        setTimeout(renderStickiesWithDelay, 400);
+        setTimeout(renderStickiesWithDelay, ANIMATION_DELAY);
       } else {
         done();
       }
@@ -60,11 +64,11 @@ function renderAllStickies(done) {
   });
 }
 
-function createStickyHTML(sticky) {
-  var source = document.getElementById("sticky-template").innerHTML;
+function createHTML(data, templateId) {
+  var source = document.getElementById(templateId).innerHTML;
   var template = Handlebars.compile(source);
 
-  return template(sticky);
+  return template(data);
 }
 
 function isSrcVideo(filename = "") {
@@ -86,7 +90,7 @@ function renderSticky(sticky) {
     sticky.imgSrcIsVideo = true;
   }
 
-  $("#wall").append(createStickyHTML(sticky));
+  $("#wall").append(createHTML(sticky,"sticky-template"));
 }
 
 // send new sticky
@@ -109,11 +113,10 @@ $("body").on("submit", "#new-sticky-form", function(event) {
   );
 });
 
-$("#new-sticky-form").hide();
+$("body").on("change", "#new-sticky-form input[type=radio][name=bgColor]", function(event) {
+  $.each($("input[type=radio][name=bgColor]"), function(index, option) {
+    $("#new-sticky-note").removeClass(option.value);
+  });
 
-$("#pencil-toggle").on("click", function(event) {
-  $("body").toggleClass("show-form");
-  $("#new-sticky-form")[0].reset();
-  $("#new-sticky-form").show();
-  $(this).hide();
+  $("#new-sticky-note").addClass(this.value);
 });
