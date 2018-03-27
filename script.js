@@ -1,4 +1,4 @@
-const ANIMATION_DELAY = 400; // in ms
+const ANIMATION_DELAY = 200; // in ms
 
 // Initialize Firebase
 var config = {
