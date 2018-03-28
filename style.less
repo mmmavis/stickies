@@ -1,9 +1,18 @@
-@sticky-yellow: #ffc;
-@sticky-orange: #f8bd49;
-@sticky-green: #cee2d7;
-@sticky-blue: #b3cce2;
-@sticky-red: #ee5f35;
+@sticky-yellow: #ffd93a;
+@sticky-orange: #fbad4b;
+@sticky-green: #e3e546;
+@sticky-blue: #73cac4;
+@sticky-red: #f2788f;
 @sticky-purple: #a2509a;
+
+@wall-height: calc(100vh - @ceiling-height);
+
+@wall-width: 10vw;
+@wall-color: #ebebeb;
+@frame-color: #68544d;
+
+@ceiling-height: 5vh;
+@ceiling-color: lighten(@wall-color, 10%);
 
 @border-radius: 3px;
 
@@ -11,6 +20,7 @@ body {
   font: normal x-small verdana,arial,helvetica,sans-serif;
   margin: 0;
   font-size: 16px;
+  background: @wall-color;
 }
 
 * {
@@ -20,10 +30,6 @@ body {
 video,
 img {
   max-width: 100%;
-}
-
-main {
-
 }
 
 input,
@@ -57,6 +63,18 @@ button {
   font-weight: bold;
 }
 
+#erika {
+  position: fixed;
+  right: 8vw;
+  bottom: -@ceiling-height;
+  width: 200px;
+  z-index: 1000;
+
+  @media (min-width: 768px) {
+    width: 350px;
+  }
+}
+
 #pencil-toggle,
 #new-sticky-form button[type="submit"] {
   background-color: grey;
@@ -80,14 +98,29 @@ button {
   }
 }
 
+#wall-container {
+  position: absolute;
+  left: @wall-width;
+  top: @ceiling-height;
+  min-height: calc(100vh - @ceiling-height);
+  height: 100%;
+  width: calc(100vw - @wall-width);
+  z-index: 100;
+}
+
 #wall {
+  @margin-side-x: 20px; 
+  @margin-side-y: 20px;
+
   display: flex;
   flex-flow: row wrap;
+  padding: 20px 10px 200px 10px;
+  // margin: @margin-side-y @margin-side-x 0 @margin-side-x;
+  // width: calc(100% - 2*@margin-side-x);
   width: 100%;
-  min-height: 100vh;
+  min-height: @wall-height;
   overflow-y: scroll; 
-  padding: 20px 10px;
-  background: url(assets/rice-paper-2.png) 200px 200px repeat #8d7767;
+  background: url(assets/rice-paper-2.png) 200px 200px repeat #9e8c7f;
 }
 
 
@@ -148,7 +181,7 @@ button {
 
 .sticky-note {
   @side-padding: 15px;
-  @side-margin: 10px;
+  @side-margin: 15px;
   @base-width: 300px;
   @max-height: 270px;
 
@@ -161,7 +194,7 @@ button {
   background: @sticky-yellow;
   display: inline-block;
   padding: @side-padding;
-  box-shadow: 5px 5px 7px rgba(50,50,50,.6);
+  box-shadow: 7px 7px 0px rgba(50, 50, 50, 0.3);
   font-size: 20px;
   animation: stickon 100ms cubic-bezier(.6,.04,.98,.34);
 
@@ -227,3 +260,48 @@ button {
   position: relative;
   top: 0px;
 }
+
+
+
+
+#ceiling {
+  width: calc(100% - @wall-width);
+  height: @ceiling-height;
+  background: @ceiling-color;
+  position: absolute;
+  z-index: 6;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#ceiling:before { // left
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: calc((@wall-width / 4 * -1) + 1px);
+  z-index: 8;
+  border-bottom: @ceiling-height solid transparent; // height
+  border-right: calc(@wall-width / 4) solid @ceiling-color; // width
+  width: 0px;
+}
+
+#wall-left {
+  height: 100%;
+  width: @wall-width;
+  position: absolute;
+  left: 0px;
+  z-index: 6;
+  // border-right: @frame-color solid 15px;
+}
+
+// .window-frame {
+//   background: @frame-color;
+// }
+
+// #frame-top {
+//   width: 20px;
+//   height: 200px;
+//   transform: rotate(-45deg) translate(123px, 0);
+//   transform-origin: center;
+// }
