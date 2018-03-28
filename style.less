@@ -6,12 +6,10 @@
 @sticky-purple: #a2509a;
 
 @wall-color-base: #ebebeb;
-
 @wall-height: calc(100vh - @ceiling-height);
 
 @left-wall-width: 10vw;
 @left-wall-color: @wall-color-base;
-@frame-color: #68544d;
 
 @ceiling-height: 5vh;
 @ceiling-color: lighten(@wall-color-base, 10%);
@@ -77,7 +75,6 @@ button {
   }
 }
 
-#pencil-toggle,
 #new-sticky-form button[type="submit"] {
   background-color: grey;
   color: white;
@@ -86,17 +83,6 @@ button {
 
   &:hover {
     background-color: black;
-  }
-}
-
-#pencil-toggle {
-  background-image: url(assets/pencil.svg);
-  background-size: 40px 40px;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  &:hover {
-    background-image: url(assets/pencil-white.svg);
   }
 }
 
@@ -117,12 +103,9 @@ button {
   display: flex;
   flex-flow: row wrap;
   padding: 20px 10px 300px 10px;
-  // margin: @margin-side-y @margin-side-x 0 @margin-side-x;
-  // width: calc(100% - 2*@margin-side-x);
   width: 100%;
   min-height: @wall-height;
   background: url(assets/rice-paper-2.png) 200px 200px repeat #9e8c7f;
-  margin-bottom: -200px;
 }
 
 
@@ -219,43 +202,40 @@ button {
     }
   }
 
+  &:nth-child(even) {
+    transform: rotate(-2deg);
+    position: relative;
+    top: -2px;
+  }
+
+  &:nth-child(3n) {
+    transform: rotate(1deg);
+    position: relative;
+    top: 0;
+  }
+
+  &:nth-child(5n) {
+    transform: rotate(2deg);
+    position: relative;
+    top: -1px;
+  }
+
+  &:nth-child(7n) {
+    transform: rotate(-1deg);
+    position: relative;
+    top: -2px;
+  }
+
+  &:nth-child(10n) {
+    transform: rotate(0deg);
+    position: relative;
+    top: 0px;
+  }
+
   .submitter {
     float: right;
   }
 }
-
-.sticky-note:nth-child(even) {
-  transform: rotate(-2deg);
-  position: relative;
-  top: -2px;
-}
-
-.sticky-note:nth-child(3n) {
-  transform: rotate(1deg);
-  position: relative;
-  top: 0;
-}
-
-.sticky-note:nth-child(5n) {
-  transform: rotate(2deg);
-  position: relative;
-  top: -1px;
-}
-
-.sticky-note:nth-child(7n) {
-  transform: rotate(-1deg);
-  position: relative;
-  top: -2px;
-}
-
-.sticky-note:nth-child(10n) {
-  transform: rotate(0deg);
-  position: relative;
-  top: 0px;
-}
-
-
-
 
 #ceiling {
   width: calc(100% - @left-wall-width);
@@ -268,7 +248,7 @@ button {
   margin-right: auto;
 }
 
-#ceiling:before { // left
+#ceiling:before {
   content: '';
   position: absolute;
   top: 0px;
@@ -285,16 +265,4 @@ button {
   position: absolute;
   left: 0px;
   z-index: 6;
-  // border-right: @frame-color solid 15px;
 }
-
-// .window-frame {
-//   background: @frame-color;
-// }
-
-// #frame-top {
-//   width: 20px;
-//   height: 200px;
-//   transform: rotate(-45deg) translate(123px, 0);
-//   transform-origin: center;
-// }
