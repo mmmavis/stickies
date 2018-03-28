@@ -9,10 +9,12 @@
 @wall-height: calc(100vh - @ceiling-height);
 
 @left-wall-width: 10vw;
-@left-wall-color: @wall-color-base;
+@left-wall-color: lighten(@wall-color-base, 5%);
 
-@ceiling-height: 5vh;
-@ceiling-color: lighten(@wall-color-base, 10%);
+@ceiling-height: 7vh;
+@ceiling-color: darken(@wall-color-base, 2%);
+
+@main-wall-color: lighten(@wall-color-base, 25%);
 
 @border-radius: 3px;
 
@@ -94,6 +96,7 @@ button {
   height: @wall-height;
   overflow-y: scroll;
   z-index: 100;
+  background: @main-wall-color;
 }
 
 #wall {
@@ -103,7 +106,8 @@ button {
   display: flex;
   flex-flow: row wrap;
   padding: 20px 10px 300px 10px;
-  width: 100%;
+  margin: @margin-side-y 0 0 @margin-side-x;
+  width: calc(100% - @margin-side-x);
   min-height: @wall-height;
   background: url(assets/rice-paper-2.png) 200px 200px repeat #9e8c7f;
 }
