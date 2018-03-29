@@ -120,3 +120,7 @@ $("body").on("change", "#new-sticky-form input[type=radio][name=bgColor]", funct
 
   $("#new-sticky-note").addClass(this.value);
 });
+
+setInterval(function() {
+  $("#shreddy").toggleClass("jump");
+}, 3000)

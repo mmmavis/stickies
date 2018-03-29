@@ -65,15 +65,69 @@ button {
   font-weight: bold;
 }
 
-#erika {
+#erika-shreddy {
   position: fixed;
-  right: 8vw;
+  right: 0;
   bottom: -@ceiling-height;
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+}
+
+#erika {
   width: 200px;
-  z-index: 1000;
+  z-index: 102;
 
   @media (min-width: 768px) {
     width: 350px;
+  }
+}
+
+#shreddy {
+  @width: 379px / 2;
+  @height: 464px / 2;
+  @top: @height / 2;
+  @right: calc(@width / 3);
+
+  position: relative;
+  top: @top;
+  right: 40px;
+  width: @width/2;
+  height: @height/2;
+  z-index: 101;
+
+  @media (min-width: 768px) {
+    top: @top;
+    right: @right;
+    width: @width;
+    height: @height;
+  }
+
+  &.jump {
+    animation: jump 2s cubic-bezier(.22,.61,.36,1);
+    transform-origin: center bottom;
+
+    @keyframes jump {
+      20% {
+        top: 0;
+        transform: rotate(5deg);
+      }
+
+      30% {
+        top: 0;
+        transform: rotate(-5deg);
+      }
+
+      40% {
+        top: 0;
+        transform: rotate(5deg);
+      }
+
+      70% {
+        top: @top;
+        transform: rotate(0);
+      }
+    }
   }
 }
 
@@ -198,10 +252,16 @@ button {
       max-width: @base-width * 2 - 200px;
 
       img {
+        border-radius: @border-radius;
         margin-right: 10px;
         max-width: 50%;
         max-height: calc(@max-height - @side-padding*2);
         float: left;
+        transition: all .3s ease-in-out;
+
+        &:hover {
+          transform: scale(2);
+        }
       }
     }
   }
@@ -246,7 +306,7 @@ button {
   height: @ceiling-height;
   background: @ceiling-color;
   position: absolute;
-  z-index: 6;
+  z-index: 1;
   right: 0;
   margin-left: auto;
   margin-right: auto;
@@ -257,7 +317,7 @@ button {
   position: absolute;
   top: 0px;
   left: calc((@left-wall-width / 4 * -1) + 1px);
-  z-index: 8;
+  z-index: 2;
   border-bottom: @ceiling-height solid transparent; // height
   border-right: calc(@left-wall-width / 4) solid @ceiling-color; // width
   width: 0px;
@@ -268,5 +328,5 @@ button {
   width: @left-wall-width;
   position: absolute;
   left: 0px;
-  z-index: 6;
+  z-index: 1;
 }
