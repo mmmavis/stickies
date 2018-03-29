@@ -30,7 +30,12 @@
               Sorry, your browser doesn't support embedded videos.
             </video>
           {{else if imgSrc}}
-            <a href="{{imgSrc}}" target="_blank" title="click to see full size"><img src="{{imgSrc}}"></a>
+            <div class="img-container">
+              <a href="{{imgSrc}}" target="_blank" title="click to see full size">
+                <img src="{{imgSrc}}">
+                <div class="overlay">click to see full size image</div>
+              </a>
+            </div>
           {{/if}}
           <div>
             <div>{{{message}}}</div>
@@ -97,10 +102,10 @@
         <div class="wall top"></div>
       </div>
     </div>
-    <div id="erika-shreddy">
+    <!-- <div id="erika-shreddy">
       <img src="assets/erika@2x.png" width="350" id="erika" />
       <img src="assets/shreddy@2x.png" id="shreddy" width="379" class=""></div>
-    </div>
+    </div> -->
 
     <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
     <script src="script.js"></script>

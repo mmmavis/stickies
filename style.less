@@ -6,14 +6,8 @@
 @sticky-purple: #a2509a;
 
 @wall-color-base: #ebebeb;
-@wall-height: calc(100vh - @ceiling-height);
-
-@left-wall-width: 10vw;
 @left-wall-color: lighten(@wall-color-base, 5%);
-
-@ceiling-height: 7vh;
 @ceiling-color: darken(@wall-color-base, 2%);
-
 @main-wall-color: lighten(@wall-color-base, 25%);
 
 @border-radius: 3px;
@@ -79,7 +73,7 @@ button {
 #erika-shreddy {
   position: fixed;
   right: 0;
-  bottom: -@ceiling-height;
+  bottom: -7vh;
   z-index: 100;
   display: flex;
   align-items: flex-end;
@@ -135,6 +129,11 @@ button {
       }
 
       70% {
+        top: 0;
+        transform: rotate(2deg);
+      }
+
+      80% {
         top: @top;
         transform: rotate(0);
       }
@@ -337,20 +336,59 @@ button {
   }
 
   &.has-media {
+    @image-max-height: calc(@max-height - @side-padding*2);
+
+    .img-container {
+      position: relative;
+      max-width: 100%;
+      max-height: @image-max-height;
+      margin-bottom: 5px;
+
+      &:hover {
+        .overlay {
+          opacity: 1;
+        }
+      }
+    }
+
+    a {
+      display: inline-block;
+    }
+    
+    .overlay {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      width: 100%;
+      opacity: 0;
+      transition: .5s ease;
+      background: fade(black, 70%);
+      color: white;
+      display: flex;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+    }
+
     @media (min-width: 768px) {
       max-width: @base-width * 2 - 200px;
 
+      .img-container {
+        float: left;
+        display: inline-block;
+        max-width: 50%;
+        margin-right: 10px;
+        margin-bottom: 0px;
+      }
+
       img {
         border-radius: @border-radius;
-        margin-right: 10px;
-        max-width: 50%;
-        max-height: calc(@max-height - @side-padding*2);
-        float: left;
+        max-width: 100%;
+        max-height: @image-max-height;
         transition: all .3s ease-in-out;
-
-        &:hover {
-          transform: scale(2);
-        }
       }
     }
   }
