@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>Stickies</title>
+    <title>stickie wall</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <meta name="description" content="">
@@ -16,7 +16,7 @@
     <link rel="apple-touch-icon" type="image/png" sizes="90x90" href="favicon.png">
     <link rel="icon" type="image/png" sizes="90x90" href="favicon.png">
     <link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet">
-    <link rel="stylesheet/less" type="text/css" href="style.less" />
+    <link rel="stylesheet/less" type="text/css" href="simple.less" />
     <script type="text/javascript" src="lib/less.min.js" ></script>
     <script type="text/javascript" src="lib/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="lib/handlebars-v4.0.11.js"></script>
@@ -84,18 +84,15 @@
 
   </head>
   <body>
-    <div id="viewport">
-      <div id="room">
-        <div class="wall left">
-           <div class="frame outermost">
-              <div class="frame outer"></div>
-          </div>
-        </div>
-        <div class="wall back">
-          <div id="wrapping-paper"></div>
-        </div>
-        <div class="wall top"></div>
+    <div id="room">
+      <div id="left-wall">
+        <!-- <div id="frame-top" class="window-frame"></div>
+        <div id="frame-right" class="window-frame"></div> -->
       </div>
+      <div id="wall-container">
+        <div id="wall"></div>
+      </div>
+      <div id="ceiling"></div>
     </div>
     <div id="erika-shreddy">
       <img src="assets/erika@2x.png" width="350" id="erika" />
@@ -103,6 +100,6 @@
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
-    <script src="script.js"></script>
+    <script src="simple.js"></script>
   </body>
 </html>

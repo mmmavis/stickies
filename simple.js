@@ -25,7 +25,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
     renderAllStickies(function() {
       setTimeout(function() {
-        $("#wrapping-paper").append(createHTML({},"new-sticky-template"));
+        $("#wall").append(createHTML({},"new-sticky-template"));
       }, ANIMATION_DELAY);
     });
   } else {
@@ -90,7 +90,7 @@ function renderSticky(sticky) {
     sticky.imgSrcIsVideo = true;
   }
 
-  $("#wrapping-paper").append(createHTML(sticky,"sticky-template"));
+  $("#wall").append(createHTML(sticky,"sticky-template"));
 }
 
 // send new sticky

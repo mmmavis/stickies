@@ -18,22 +18,11 @@
 
 @border-radius: 3px;
 
-html,
-body {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-}
-
 body {
   font: normal x-small verdana,arial,helvetica,sans-serif;
   margin: 0;
   font-size: 16px;
   background: @left-wall-color;
-
-  overflow: hidden;
 }
 
 * {
@@ -153,108 +142,30 @@ button {
   }
 }
 
-#viewport {
-  height: 160%;
-  width: 160%;
-  background-color: white;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  perspective-origin: bottom right;
-  transform-style: preserve-3d;
-  perspective: 50vw;
-  transform: translateX(-25%) translateY(-30%);
-}
-
-#room {
-  height:100%;
-  width:100%;
-  margin:0;
-  padding:0;
-  transform-style:preserve-3d;
-}
-
-.wall {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 70%;
-  height: 70%;
+#wall-container {
   position: absolute;
-  backface-visibility: inherit;
-  transform-style:preserve-3d;
-}
-
-.left {
-  transform: rotateY(-90deg) translateZ(50px);
-  transform: rotateY(-90deg) translateZ(0) translateX(50%) translateY(50%);
-  background-image: url(assets/fog-foggy-forest-4827.jpg);
-  background-size: 10vw 100%;
-  background-color: white;
-  
-  .frame {
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box; 
-    background: transparent;
-    border-style: solid;
-
-    &.outermost {
-      border-width: 8px;
-      border-color:  #917663;
-
-      @media (min-width: 768px) {
-        border-width: 16px;
-      }
-    }
-
-    &.outer {
-      border-width: 5px;
-      border-color:  #453329;
-
-      @media (min-width: 768px) {
-        border-width: 10px;
-      }
-    }
-  }
-}
-
-.top {
-  background: @ceiling-color;
-  transform: rotateX(90deg) translateZ(50px);
-  transform: rotateX(90deg) translateZ(0) translateX(50%) translateY(50%);
-}
-
-.back {
-  overflow: scroll;
+  left: @left-wall-width;
+  top: @ceiling-height;
+  width: calc(100vw - @left-wall-width);
+  height: @wall-height;
+  overflow-y: scroll;
+  z-index: 100;
   background: @main-wall-color;
-  transform:  translateZ(0) translateX(25%) translateY(50%);
-  background: white;
 }
 
-#wrapping-paper {
-  @margin-y: 10px;
-  @border-width: 10px;
+#wall {
+  @margin-side-x: 20px; 
+  @margin-side-y: 20px;
 
   display: flex;
   flex-flow: row wrap;
-  width: 75%;
-  position: absolute;
-  top: 0;
-  right: 0;
-  min-height: 100vh;
+  padding: 20px 10px 300px 10px;
+  margin: @margin-side-y 0 0 @margin-side-x;
+  width: calc(100% - @margin-side-x);
+  min-height: @wall-height;
   background: url(assets/rice-paper-2.png) 200px 200px repeat #9e8c7f;
-  padding: 15px 15px 500px 15px;
-  margin: @margin-y 0;
-  border-style: solid;
-  border-color: white;
-  border-width: @border-width;
-
-  @media (min-width: 768px) {
-    margin: @margin-y*2 0;
-    border-width: @border-width*2;
-  }
 }
+
 
 #new-sticky-form {
   input[type="radio"] {
@@ -388,4 +299,34 @@ button {
   .submitter {
     float: right;
   }
+}
+
+#ceiling {
+  width: calc(100% - @left-wall-width);
+  height: @ceiling-height;
+  background: @ceiling-color;
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#ceiling:before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: calc((@left-wall-width / 4 * -1) + 1px);
+  z-index: 2;
+  border-bottom: @ceiling-height solid transparent; // height
+  border-right: calc(@left-wall-width / 4) solid @ceiling-color; // width
+  width: 0px;
+}
+
+#left-wall {
+  height: calc(100vh - @left-wall-width);
+  width: @left-wall-width;
+  position: absolute;
+  left: 0px;
+  z-index: 1;
 }
