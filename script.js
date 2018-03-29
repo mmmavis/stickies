@@ -38,7 +38,6 @@ Handlebars.registerHelper("localTime", function(timestamp) {
   return moment.unix(timestamp/1000).format("YYYY-MM-DD hh:mm a");
 });
 
-
 function renderAllStickies(done) {
   firebase.database().ref('/stickies').once('value').then(function(snapshot) {
     var stickies = snapshot.val();
@@ -71,6 +70,32 @@ function createHTML(data, templateId) {
   return template(data);
 }
 
+function getFileExtensionFromLink(url) {
+  var extension = url.split('.').pop().split(/\#|\?/g)[0];
+  var mediaType = "webpage";
+
+  switch (extension.toLowerCase()) {
+    case "":
+      mediaType = false;
+      break;
+    case "jpg":
+    case "jpeg":
+    case "png":
+    case "gif":
+      mediaType = "image"
+      break;
+    case "mp4":
+    case "avi":
+    case "mpg":
+      mediaType = "video";
+    }
+
+  return {
+    extension: extension,
+    mediaType: mediaType
+  };
+}
+
 function isSrcVideo(filename = "") {
   var ext = filename.split("?")[0].split(".").pop();
 
@@ -85,10 +110,13 @@ function isSrcVideo(filename = "") {
 }
 
 function renderSticky(sticky) {
-  // check if imgSrc is actually a video...
-  if (isSrcVideo(sticky.imgSrc)) {
-    sticky.imgSrcIsVideo = true;
-  }
+  switch (getFileExtensionFromLink(sticky.imgSrc).mediaType) {
+    case "video":
+      sticky.imgSrcIsVideo = true;
+      break;
+    case "webpage":
+      sticky.imgSrcIsWebpage = true;
+    }
 
   $("#wrapping-paper").append(createHTML(sticky,"sticky-template"));
 }

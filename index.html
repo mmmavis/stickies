@@ -29,6 +29,10 @@
             <video src="{{imgSrc}}"controls preload="metadata">
               Sorry, your browser doesn't support embedded videos.
             </video>
+          {{else if imgSrcIsWebpage}}
+            <a href="{{imgSrc}}" target="_blank"">
+              (check this out)
+            </a>
           {{else if imgSrc}}
             <div class="img-container">
               <a href="{{imgSrc}}" target="_blank" title="click to see full size">
