@@ -306,7 +306,8 @@ button {
   @side-padding: 15px;
   @side-margin: 15px;
   @base-width: 300px;
-  @max-height: 270px;
+  // @max-height: 280px;
+  @max-height: 100%;
 
   flex: auto;
   max-width: 100%;
@@ -421,6 +422,15 @@ button {
     transform: rotate(0deg);
     position: relative;
     top: 0px;
+  }
+
+  .content {
+    &:after {
+      content: " ";
+      display: block;
+      height: 0;
+      clear: both;
+    }
   }
 
   .submitter {
