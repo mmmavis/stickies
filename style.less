@@ -8,7 +8,7 @@
 @wall-color-base: #ebebeb;
 @left-wall-color: lighten(@wall-color-base, 5%);
 @ceiling-color: darken(@wall-color-base, 2%);
-@main-wall-color: lighten(@wall-color-base, 25%);
+@main-wall-color: #cdbfab;
 
 @border-radius: 3px;
 
@@ -228,7 +228,6 @@ button {
   overflow: scroll;
   background: @main-wall-color;
   transform:  translateZ(0) translateX(25%) translateY(50%);
-  background: white;
 }
 
 #wrapping-paper {
@@ -246,7 +245,7 @@ button {
   padding: 15px 15px 500px 15px;
   margin: @margin-y 0;
   border-style: solid;
-  border-color: white;
+  border-color: @main-wall-color;
   border-width: @border-width;
 
   @media (min-width: 768px) {
